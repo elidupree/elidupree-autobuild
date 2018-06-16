@@ -1,3 +1,10 @@
+# Custom gitignored stuff
+
+/share_prefix
+/mount_share.sh
+
+# Dull generic gitignored stuff
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
