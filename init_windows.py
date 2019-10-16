@@ -33,5 +33,7 @@ pause
 if make_build_script:
   with open (build_script_path, "w") as file:
   file.write (f"""
+cd "{project_path}"
 copy /b "{project_path}\\modify_noticer" +,, "{project_path}\\modify_noticer"
+
 """)
