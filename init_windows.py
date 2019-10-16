@@ -8,15 +8,30 @@ if len(sys.argv) < 2:
 
 project = sys.argv[1]
 port = sys.argv[2]
+make_build_script = len(sys.argv) >= 2 and sys.argv[2] == "-b"
+hilarious_path = 'C:\\Users\\Eli\\Documents\\hilarious-text-editor'
+project_path = 'C:\\Users\\Eli\\Documents\\' + project
+build_script_path = f'{hilarious_path}\\build_{project}.cmd'
 
-with open ("C:\\Users\\Eli\\Documents\\" + project + "\\modify_noticer", "w") as file:
+if make_build_script:
+  on_save = f'''" ""{build_script_path}"" "'''
+else:
+  on_save = f'''"copy /b ""{project_path}\\modify_noticer"" +,, ""{project_path}\\modify_noticer"" "'''
+
+with open (project_path + "\\modify_noticer", "w") as file:
   pass
 with open ("C:\\Users\\Eli\\Documents\\hilarious-text-editor\\edit_" + project + ".cmd", "w") as file:
-  file.write ("""
-C:\\Users\\Eli\\Documents\\hilarious-text-editor\\hilarious.py ^
-  C:\\Users\\Eli\\Documents\\""" + project + """ ^
-  --port """ + port + """ ^
-  --on-save "copy /b C:\\Users\\Eli\\Documents\\""" + project + """\\modify_noticer +,, C:\\Users\\Eli\\Documents\\""" + project + """\\modify_noticer" ^
+  file.write (f"""
+python ""{hilarious_path}\\hilarious.py"" ^
+  ""C:\\Users\\Eli\\Documents\\{project}"" ^
+  --port {port} ^
+  --on-save {on_save} ^
   --exclude-re "[\\\\/](\\.git|target|build)[\\\\/]"
 pause
+""")
+
+if make_build_script:
+  with open (build_script_path, "w") as file:
+  file.write (f"""
+copy /b "{project_path}\\modify_noticer" +,, "{project_path}\\modify_noticer"
 """)
