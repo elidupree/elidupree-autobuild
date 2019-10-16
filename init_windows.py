@@ -8,7 +8,7 @@ if len(sys.argv) < 2:
 
 project = sys.argv[1]
 port = sys.argv[2]
-make_build_script = len(sys.argv) >= 2 and sys.argv[2] == "-b"
+make_build_script = len(sys.argv) >= 2 and sys.argv[3] == "-b"
 hilarious_path = 'C:\\Users\\Eli\\Documents\\hilarious-text-editor'
 project_path = 'C:\\Users\\Eli\\Documents\\' + project
 build_script_path = f'{hilarious_path}\\build_{project}.cmd'
@@ -32,8 +32,7 @@ pause
 
 if make_build_script:
   with open (build_script_path, "w") as file:
-  file.write (f"""
-cd "{project_path}"
+    file.write (f"""cd "{project_path}"
 copy /b "{project_path}\\modify_noticer" +,, "{project_path}\\modify_noticer"
 
 """)
