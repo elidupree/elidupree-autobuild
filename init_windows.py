@@ -2,13 +2,14 @@
 
 import sys
 
+print(sys.argv)
 if len(sys.argv) < 2:
   print("usage: init_windows.py projectname port")
   sys.exit(0)
 
 project = sys.argv[1]
 port = sys.argv[2]
-make_build_script = len(sys.argv) > 3 and sys.argv[3] == "-b"
+make_build_script = True #len(sys.argv) > 3 and sys.argv[3] == "-b"
 hilarious_path = 'C:\\Users\\Eli\\Documents\\hilarious-text-editor'
 project_path = 'C:\\Users\\Eli\\Documents\\' + project
 build_script_path = f'{hilarious_path}\\build_{project}.cmd'
